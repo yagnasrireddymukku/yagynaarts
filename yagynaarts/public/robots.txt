@@ -1,0 +1,19 @@
+# robots.txt for Yagyna Arts
+# https://www.yagynaarts.com/
+
+User-agent: *
+Allow: /
+
+# Block private / transactional pages from indexing
+Disallow: /cart.html
+Disallow: /checkout.html
+Disallow: /account.html
+Disallow: /login.html
+Disallow: /register.html
+Disallow: /forgot-password.html
+Disallow: /wishlist.html
+Disallow: /order-tracking.html
+
+# Sitemaps
+Sitemap: https://www.yagynaarts.com/sitemap.xml
+Sitemap: https://www.yagynaarts.com/sitemap-images.xml

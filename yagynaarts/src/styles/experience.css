@@ -1,0 +1,184 @@
+/* =====================================================================
+   YAGYNA ARTS — experience.css
+   Cinematic, Apple-style interactive sections. Loads AFTER style.css
+   (reuses its design tokens). Scoped to experience.html.
+   ===================================================================== */
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+.exp-main { overflow-x: clip; }
+
+/* ---------- Generic section intro ---------- */
+.exp-section { position: relative; padding: clamp(4rem,8vw,8rem) 0; }
+.exp-kicker { font-family: var(--font-btn); text-transform: uppercase; letter-spacing: .25em; font-size: .72rem; font-weight: 600; color: var(--c-primary); display: inline-block; margin-bottom: 1rem; }
+.exp-h2 { font-size: clamp(2rem,4.4vw,3.4rem); line-height: 1.08; }
+
+/* ===================================================================
+   FEATURE 1 — SCROLL STORYTELLING (pinned)
+   =================================================================== */
+.story { position: relative; background: var(--c-dark); color: #fff; }
+.story-pin { height: 100vh; position: relative; overflow: hidden; display: grid; place-items: center; }
+.story-bg { position: absolute; inset: 0; z-index: 0; transition: background .8s var(--ease); }
+.story-bg.s0 { background: radial-gradient(circle at 30% 30%, #2a2350, #121212 70%); }
+.story-particles { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.story-particles span { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fff, rgba(108,99,255,.5)); opacity: .5; }
+
+.scene { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 2rem; z-index: 3; opacity: 0; }
+.scene h2 { color: #fff; font-size: clamp(2rem,6vw,5rem); line-height: 1.05; margin: 0; }
+.scene .scene-sub { color: rgba(255,255,255,.7); font-family: var(--font-btn); max-width: 540px; margin: 1rem auto 0; }
+.scene .text-shimmer { background-size: 200% auto; }
+
+/* Scene product */
+.story-product { width: min(46vh, 360px); aspect-ratio: 1; border-radius: 28px; overflow: hidden; box-shadow: 0 30px 90px rgba(108,99,255,.4); position: relative; }
+.story-product img { width: 100%; height: 100%; object-fit: cover; }
+.story-glow { position: absolute; inset: -40% ; background: radial-gradient(circle, rgba(0,229,255,.35), transparent 60%); z-index: 2; pointer-events: none; }
+
+/* Scene 2 flow */
+.flow-steps { display: flex; flex-direction: column; gap: .6rem; align-items: center; }
+.flow-steps .fs { font-family: var(--font-head); font-size: clamp(1.1rem,2.4vw,1.8rem); color: #fff; opacity: .25; transition: opacity .4s, transform .4s; }
+.flow-steps .fs.lit { opacity: 1; color: var(--c-accent); transform: scale(1.06); }
+.flow-steps .arrow { color: rgba(255,255,255,.4); }
+
+/* Scene 4 explode layers */
+.layers { position: relative; width: min(46vh,360px); aspect-ratio: 1; }
+.layer { position: absolute; inset: 0; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.4); display: grid; place-items: end center; }
+.layer img { width: 100%; height: 100%; object-fit: cover; }
+.layer .lbl { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: var(--glass-bg); color: var(--c-text); font-family: var(--font-btn); font-weight: 700; font-size: .72rem; padding: .25rem .7rem; border-radius: 999px; white-space: nowrap; }
+
+.story-progress { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 5; display: flex; gap: .5rem; }
+.story-progress i { width: 28px; height: 4px; border-radius: 4px; background: rgba(255,255,255,.25); transition: background .3s; }
+.story-progress i.on { background: var(--grad-brand); }
+.scroll-cue { position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%); z-index: 5; color: rgba(255,255,255,.6); font-family: var(--font-btn); font-size: .8rem; text-align: center; animation: cueBounce 2s infinite; }
+@keyframes cueBounce { 0%,100%{ transform: translate(-50%,0); } 50%{ transform: translate(-50%,8px); } }
+
+/* ===================================================================
+   FEATURE 3 — BEFORE / AFTER SLIDER
+   =================================================================== */
+.ba-wrap { position: relative; max-width: 920px; margin: 0 auto; border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--sh-lg); aspect-ratio: 3/2; -webkit-user-select: none; user-select: none; }
+.ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-drag: none; }
+.ba-after { clip-path: inset(0 0 0 50%); }
+.ba-label { position: absolute; top: 14px; z-index: 4; background: var(--glass-bg); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font-family: var(--font-btn); font-weight: 700; font-size: .75rem; padding: .35rem .8rem; border-radius: 999px; }
+.ba-label.l { left: 14px; } .ba-label.r { right: 14px; color: var(--c-primary); }
+.ba-divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: #fff; z-index: 5; transform: translateX(-50%); box-shadow: 0 0 16px rgba(0,0,0,.4); }
+.ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 48px; height: 48px; border-radius: 50%; background: #fff; z-index: 6; display: grid; place-items: center; cursor: ew-resize; box-shadow: var(--sh-md); color: var(--c-primary); font-size: 1.1rem; }
+.ba-tabs { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-bottom: 1.6rem; }
+
+/* ===================================================================
+   FEATURE 6 — VIDEO STORYTELLING (alternating)
+   =================================================================== */
+.vs-row { align-items: center; }
+.vs-media { position: relative; border-radius: var(--r-xl); overflow: hidden; aspect-ratio: 16/9; max-height: 340px; box-shadow: var(--sh-md); }
+.vs-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+.vs-media:hover img { transform: scale(1.05); }
+.vs-play { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(18,18,18,.18); }
+.vs-play button { width: 76px; height: 76px; border-radius: 50%; border: 0; background: var(--glass-bg); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); color: var(--c-primary); font-size: 1.8rem; cursor: pointer; box-shadow: var(--sh-md); transition: transform .3s; }
+.vs-play button:hover { transform: scale(1.08); }
+.vs-tag { font-family: var(--font-btn); text-transform: uppercase; letter-spacing: .14em; font-size: .72rem; color: var(--c-primary); font-weight: 600; }
+
+/* ===================================================================
+   FEATURE 2 — PRODUCTION JOURNEY TIMELINE
+   =================================================================== */
+.journey { position: relative; max-width: 880px; margin: 0 auto; }
+.journey-track { position: absolute; left: 27px; top: 0; bottom: 0; width: 3px; background: var(--c-line); border-radius: 3px; }
+.journey-fill { position: absolute; left: 27px; top: 0; width: 3px; height: 0; background: var(--grad-brand); border-radius: 3px; z-index: 1; box-shadow: 0 0 12px rgba(108,99,255,.5); }
+.j-step { position: relative; padding: 0 0 1.6rem 76px; opacity: 0; transform: translateX(28px); }
+.j-step.in { opacity: 1; transform: none; transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.j-dot { position: absolute; left: 12px; top: 2px; width: 34px; height: 34px; border-radius: 50%; background: #fff; border: 3px solid var(--c-line); display: grid; place-items: center; z-index: 2; color: var(--c-muted); font-size: .9rem; transition: all .4s; }
+.j-step.done .j-dot { background: var(--grad-brand); border-color: transparent; color: #fff; box-shadow: var(--sh-glow); }
+.j-card { background: #fff; border: 1px solid var(--c-line); border-radius: var(--r-md); padding: 1rem 1.2rem; box-shadow: var(--sh-sm); }
+.j-card .j-head { display: flex; justify-content: space-between; align-items: center; gap: .6rem; flex-wrap: wrap; }
+.j-card h3 { font-size: 1.05rem; margin: 0; }
+.j-meta { font-family: var(--font-btn); font-size: .76rem; color: var(--c-muted); }
+.j-prog { height: 6px; border-radius: 6px; background: var(--c-line); overflow: hidden; margin: .6rem 0; }
+.j-prog i { display: block; height: 100%; background: var(--grad-brand); border-radius: 6px; }
+.j-actions { display: flex; gap: .8rem; align-items: center; margin-top: .4rem; }
+.j-actions button { border: 0; background: none; cursor: pointer; color: var(--c-muted); font-family: var(--font-btn); font-size: .82rem; display: inline-flex; align-items: center; gap: .3rem; }
+.j-actions button.liked { color: #ff2d55; }
+.j-status { font-family: var(--font-btn); font-size: .7rem; font-weight: 700; padding: .2rem .6rem; border-radius: 999px; }
+.j-status.done { background: rgba(22,163,74,.12); color: #16a34a; }
+.j-status.active { background: var(--grad-brand-soft); color: var(--c-primary); }
+.j-status.pending { background: var(--c-bg); color: var(--c-muted); }
+
+/* ===================================================================
+   FEATURE 4 — YOUTUBE GALLERY
+   =================================================================== */
+.yt-card { position: relative; border-radius: var(--r-md); overflow: hidden; box-shadow: var(--sh-sm); cursor: pointer; background: #000; aspect-ratio: 16/9; }
+.yt-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); opacity: .92; }
+.yt-card:hover img { transform: scale(1.06); opacity: 1; }
+.yt-card .yt-play { position: absolute; inset: 0; display: grid; place-items: center; }
+.yt-card .yt-play i { font-size: 3rem; color: #fff; filter: drop-shadow(0 3px 10px rgba(0,0,0,.5)); transition: transform .3s; }
+.yt-card:hover .yt-play i { transform: scale(1.12); }
+.yt-card .yt-dur { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,.8); color: #fff; font-family: var(--font-btn); font-size: .72rem; padding: .15rem .45rem; border-radius: 5px; }
+.yt-card.short { aspect-ratio: 9/16; }
+.yt-meta { padding: .7rem .2rem; }
+.yt-meta b { font-family: var(--font-btn); font-size: .92rem; display: block; line-height: 1.3; }
+.yt-meta span { font-size: .78rem; color: var(--c-muted); }
+
+.media-modal { position: fixed; inset: 0; background: rgba(10,10,15,.92); z-index: 2000; display: none; place-items: center; padding: 2rem; }
+.media-modal.show { display: grid; }
+.media-modal .mm-inner { width: min(960px, 96vw); }
+.media-modal .ratio { position: relative; padding-top: 56.25%; border-radius: var(--r-md); overflow: hidden; box-shadow: var(--sh-lg); }
+.media-modal .ratio.vert { padding-top: 0; aspect-ratio: 9/16; max-width: 420px; margin: 0 auto; }
+.media-modal iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.media-modal .mm-close { position: absolute; top: 18px; right: 22px; background: none; border: 0; color: #fff; font-size: 2rem; cursor: pointer; }
+
+/* ===================================================================
+   FEATURE 5 — INSTAGRAM REELS
+   =================================================================== */
+.ig-grid { columns: 4; column-gap: 1rem; }
+.ig-card { break-inside: avoid; margin-bottom: 1rem; position: relative; border-radius: var(--r-md); overflow: hidden; box-shadow: var(--sh-sm); display: block; }
+.ig-card img { width: 100%; display: block; transition: transform .6s var(--ease); }
+.ig-card:hover img { transform: scale(1.05); }
+.ig-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,18,18,.7), transparent 50%); opacity: 0; transition: opacity .3s; }
+.ig-card:hover::after { opacity: 1; }
+.ig-card .ig-type { position: absolute; top: 10px; right: 10px; color: #fff; font-size: 1.1rem; z-index: 2; filter: drop-shadow(0 1px 3px rgba(0,0,0,.5)); }
+.ig-card .ig-stats { position: absolute; bottom: 10px; left: 12px; z-index: 2; color: #fff; font-family: var(--font-btn); font-size: .82rem; display: flex; gap: .9rem; opacity: 0; transform: translateY(6px); transition: all .3s; }
+.ig-card:hover .ig-stats { opacity: 1; transform: none; }
+@media (max-width: 991px){ .ig-grid { columns: 3; } }
+@media (max-width: 700px){ .ig-grid { columns: 2; } }
+
+/* Admin config note box */
+.cfg-note { background: var(--grad-brand-soft); border: 1px dashed var(--c-primary); border-radius: var(--r-md); padding: 1rem 1.2rem; font-family: var(--font-btn); font-size: .85rem; color: var(--c-text-soft); }
+.cfg-note code { background: rgba(108,99,255,.12); padding: .1rem .4rem; border-radius: 5px; color: var(--c-primary); }
+
+/* ===================================================================
+   COMPACT PRODUCTION JOURNEY (grid)
+   =================================================================== */
+.jx-summary { max-width: 560px; margin: 0 auto 1.8rem; text-align: center; }
+.jx-count { font-family: var(--font-btn); font-size: .9rem; color: var(--c-text-soft); margin-bottom: .5rem; }
+.jx-count b { color: var(--c-primary); }
+.jx-bar { height: 8px; border-radius: 8px; background: var(--c-line); overflow: hidden; }
+.jx-bar i { display: block; height: 100%; background: var(--grad-brand); border-radius: 8px; transition: width 1.2s var(--ease); }
+.jx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; max-width: 1140px; margin: 0 auto; }
+.jx-step { display: flex; gap: .8rem; align-items: flex-start; background: #fff; border: 1px solid var(--c-line); border-radius: var(--r-md); padding: .9rem 1rem; box-shadow: var(--sh-sm); opacity: 0; transform: translateY(16px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+.jx-step.in { opacity: 1; transform: none; }
+.jx-step:hover { box-shadow: var(--sh-md); transform: translateY(-3px); }
+.jx-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-btn); font-weight: 700; font-size: .85rem; background: var(--c-bg); color: var(--c-muted); border: 2px solid var(--c-line); }
+.jx-step.done .jx-num { background: var(--grad-brand); color: #fff; border-color: transparent; box-shadow: var(--sh-glow); }
+.jx-step.active .jx-num { border-color: var(--c-primary); color: var(--c-primary); }
+.jx-body { flex: 1; min-width: 0; }
+.jx-top { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.jx-top b { font-family: var(--font-head); font-size: 1rem; line-height: 1.2; }
+.jx-body p { font-size: .82rem; color: var(--c-text-soft); margin: .25rem 0 0; line-height: 1.45; }
+.jx-status { font-family: var(--font-btn); font-size: .6rem; font-weight: 700; padding: .18rem .5rem; border-radius: 999px; white-space: nowrap; text-transform: uppercase; letter-spacing: .04em; }
+.jx-status.done { background: rgba(22,163,74,.12); color: #16a34a; }
+.jx-status.active { background: var(--grad-brand-soft); color: var(--c-primary); }
+.jx-status.pending { background: var(--c-bg); color: var(--c-muted); }
+
+/* YouTube short badge (keeps grid uniform 16:9) */
+.yt-badge { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,.75); color: #fff; font-family: var(--font-btn); font-size: .66rem; font-weight: 700; padding: .15rem .5rem; border-radius: 5px; display: inline-flex; align-items: center; gap: .25rem; z-index: 2; }
+.yt-badge i { color: #00E5FF; }
+
+/* ===================================================================
+   FEATURE 9 — REDUCED MOTION
+   =================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .jx-step { opacity: 1 !important; transform: none !important; }
+  .story-pin { height: auto; min-height: 60vh; }
+  .scene { position: relative; opacity: 1 !important; }
+  .story-particles, .scroll-cue { display: none; }
+  .j-step { opacity: 1 !important; transform: none !important; }
+}
